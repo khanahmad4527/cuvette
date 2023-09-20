@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import GreenLightRedLight from "./components/GreenLightRedLight";
+import { Routes, Route } from "react-router-dom";
+import Form from "./components/Auth/Form";
+import AuthProtectedRoutes from "./hoc/AuthProtectedRoutes";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path={"/"} element={<Form />} />
+      <Route
+        path={"/game"}
+        element={
+          <AuthProtectedRoutes>
+            <GreenLightRedLight />
+          </AuthProtectedRoutes>
+        }
+      />
+    </Routes>
   );
-}
+};
 
 export default App;
